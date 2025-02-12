@@ -25,7 +25,7 @@ function App() {
           onChange={(e) => setHex(e.target.value)}
           placeholder="#hexcode" />
 
-        <button onClick={handleGenerateColors}>Gerar Cores</button>
+        <button onClick={handleGenerateColors}>Generate</button>
       </div>
 
       <hr className="hr"></hr>
