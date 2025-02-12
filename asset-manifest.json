@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/tints-and-shades/static/css/main.811af66d.css",
+    "main.css": "/tints-and-shades/static/css/main.4675310e.css",
     "main.js": "/tints-and-shades/static/js/main.1c620506.js",
     "index.html": "/tints-and-shades/index.html",
-    "main.811af66d.css.map": "/tints-and-shades/static/css/main.811af66d.css.map",
+    "main.4675310e.css.map": "/tints-and-shades/static/css/main.4675310e.css.map",
     "main.1c620506.js.map": "/tints-and-shades/static/js/main.1c620506.js.map"
   },
   "entrypoints": [
-    "static/css/main.811af66d.css",
+    "static/css/main.4675310e.css",
     "static/js/main.1c620506.js"
   ]
 }
