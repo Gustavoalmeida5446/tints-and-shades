@@ -9,7 +9,7 @@ function App() {
   const [tints, setTints] = useState([]);
   const [shades, setShades] = useState([]);
   const [convertedColor, setConvertedColor] = useState(null);
-  const [isDarkColor, setIsDarkColor] = useState(false);  // Definindo o estado corretamente
+  const [isDarkColor, setIsDarkColor] = useState(false);
 
   const handleGenerateColors = () => {
     const colorWithHash = hex.startsWith("#") ? hex : "#" + hex;
@@ -19,7 +19,6 @@ function App() {
     setShades(generateShades(hex));
     setConvertedColor(convertColor(hex));
     
-    // Verifica se a cor é escura ou clara e atualiza o estado
     setIsDarkColor(tinycolor(hex).isLight() === false); 
   };
 
@@ -85,7 +84,7 @@ function App() {
         </div>
       </div>
       <footer>
-        <p>&copy; 2025 Tints and Shades Generator. Criado por Gustavo Almeida.</p>
+        <p>&copy; {new Date().getFullYear()} Tints and Shades Generator. Criado por Gustavo Almeida.</p>
       </footer>
     </div>
   );
