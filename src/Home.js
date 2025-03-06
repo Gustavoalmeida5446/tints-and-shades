@@ -8,7 +8,7 @@ function Home() {
   const [hex, setHex] = useState("");
   const [textColor, setTextColor] = useState("#000000");
   const navigate = useNavigate();
-  const complementary = tinycolor(hex).spin(180).toString();
+  const complementary = tinycolor(hex).complement().toHexString();
 
   const generateRandomHex = () => {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);

@@ -23,10 +23,7 @@ body {
 
 .convertions-group {
   display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
-  width: 250px;
+  flex-direction: row;
 }
 
 input {
@@ -78,6 +75,7 @@ button {
   justify-content: space-between;
   align-items: center;
   border-radius: 8px;
+  width: 250px;
 }
 
 .copy-icon {
@@ -90,7 +88,15 @@ h1 {
   text-transform: uppercase;
   font-style: italic;
   font-weight: 900;
-  font-size: 36px;
+  font-size: 48px;
+}
+
+.header {
+  width: 100%;
+  margin: 0;
+  padding: 1px 0px;
+  text-align: center;
+  top: 0;
 }
 
 .logo {
@@ -108,6 +114,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
   border-radius: 8px;
+  width: 250px;
 }
 
 .combination-group {
@@ -115,11 +122,17 @@ h1 {
   flex-direction: row;
   align-items: left;
   justify-content: center;
-  width: 250px;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 600px) {
   .combination-group {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .convertions-group {
     display: flex;
     flex-direction: column;
   }

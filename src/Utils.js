@@ -27,8 +27,16 @@ export const cmyk = (colorHex) => {
 };
 
 export const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text).then(() => {
-        console.log("copied");
-    });
+  navigator.clipboard.writeText(text).then(() => {
+    console.log("copied");
+  });
 };
 
+export const triad = (colorHex) => {
+  const mainColor = tinycolor(colorHex);
+  return mainColor.triad().map((color, index) => ({
+    color: color,
+    hex: color.toHexString(),
+    id: `triad-${index}`,
+  }));
+};
