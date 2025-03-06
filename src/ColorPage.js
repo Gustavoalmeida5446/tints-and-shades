@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import tinycolor from "tinycolor2";
-import { rgb, hsl, cmyk, copyToClipboard, triad } from "./Utils"
+import { rgb, hsl, cmyk, copyToClipboard, triad, tetrad } from "./Utils"
 import { FaRegCopy } from "react-icons/fa6";
 import "./App.css";
 
@@ -13,8 +13,7 @@ function ColorPage() {
     const [textColor, setTextColor] = useState("black");
     const complementary = tinycolor(colorHex).complement().toHexString();
     const triadColors = triad(mainColor);
-
-
+    const tetradColors = tetrad(mainColor);
 
     useEffect(() => {
         if (theColor.isValid()) {
@@ -77,6 +76,34 @@ function ColorPage() {
                             {colorObj.hex} <FaRegCopy style={{ color: textColor }} className="copy-icon" />
                         </p>
                     ))}
+                </div>
+               
+                <h3>Tetrad Combination</h3>
+                <div className="combination-group">
+                    {tetradColors.map((colorObj) => (
+                        <p
+                            key={colorObj.id}
+                            onClick={() => copyToClipboard(colorObj.hex)}
+                            className="convertion"
+                            style={{ backgroundColor: colorObj.hex, color: textColor }}
+                        >
+                            {colorObj.hex} <FaRegCopy style={{ color: textColor }} className="copy-icon" />
+                        </p>
+                    ))}
+                </div>
+               
+                <h3>Shades</h3>
+                <div className="combination-group">
+                    {/* {shadesColor.map((colorObj) => (
+                        <p
+                            key={colorObj.id}
+                            onClick={() => copyToClipboard(colorObj.hex)}
+                            className="convertion"
+                            style={{ backgroundColor: colorObj.hex, color: textColor }}
+                        >
+                            {colorObj.hex} <FaRegCopy style={{ color: textColor }} className="copy-icon" />
+                        </p>
+                    ))} */}
                 </div>
 
             </div>

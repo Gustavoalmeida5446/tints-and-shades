@@ -40,3 +40,21 @@ export const triad = (colorHex) => {
     id: `triad-${index}`,
   }));
 };
+
+export const tetrad = (colorHex) => {
+  const mainColor = tinycolor(colorHex);
+  return mainColor.tetrad().map((color, index) => ({
+    color: color,
+    hex: color.toHexString(),
+    id: `tetrad-${index}`,
+  }));
+};
+
+// export const shades = (colorHex) => {
+  // const mainColor = tinycolor(colorHex);
+  // return mainColor.darken(50).map((color, index) => ({
+  //   color: color,
+  //   hex: color.toHexString(),
+  //   id: `shades-${index}`,
+  // }));
+// };
