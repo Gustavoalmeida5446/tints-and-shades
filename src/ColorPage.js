@@ -74,7 +74,7 @@ function ColorPage() {
                             className="convertion"
                             style={{ backgroundColor: colorObj.hex, color: textColor }}
                         >
-                            Triad Color: {colorObj.hex} <FaRegCopy style={{ color: textColor }} className="copy-icon" />
+                            {colorObj.hex} <FaRegCopy style={{ color: textColor }} className="copy-icon" />
                         </p>
                     ))}
                 </div>

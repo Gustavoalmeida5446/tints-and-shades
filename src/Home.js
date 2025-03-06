@@ -59,8 +59,7 @@ function Home() {
       <img className="logo" src={Logo} alt="Logo" />
       <div className="block">
         <input
-          value={hex}
-          placeholder="#3498db"
+          placeholder={hex}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
