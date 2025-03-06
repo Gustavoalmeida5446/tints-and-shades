@@ -9,11 +9,13 @@ function ColorPage() {
     const { colorHex } = useParams();
     const mainColor = `#${colorHex}`;
     const theColor = tinycolor(mainColor);
+    const key = Math.floor(Math.random()*9999);
 
     const [textColor, setTextColor] = useState("black");
     const complementary = tinycolor(colorHex).spin(180).toString();
     const analogousColors = tinycolor(mainColor).analogous();
     const triadColors = tinycolor(mainColor).triad();
+    const tetradColors = tinycolor(mainColor).tetrad();
 
     useEffect(() => {
         if (theColor.isValid()) {
@@ -63,37 +65,55 @@ function ColorPage() {
                 </p>
 
             </div>
-                <h3 style={{ color: textColor }}>Triad Combination</h3>
-                <div className="combination-group">
-                    {triadColors.map((color, index) => (
+            <h3 style={{ color: textColor }}>Triad Combination</h3>
+            <div className="combination-group">
+                {triadColors.map((color, index) => (
 
-                            <p
-                                onClick={() => copyToClipboard(color.toHexString())}
-                                className="combination"
-                                style={{ backgroundColor: color.toHexString(), color: textColor }}
-                            >
-                                {color.toHexString()}
-                                <FaRegCopy style={{ color: textColor }} className="copy-icon" />
-                            </p>
+                    <p
+                    key={key}
+                    onClick={() => copyToClipboard(color.toHexString())}
+                        className="combination"
+                        style={{ backgroundColor: color.toHexString(), color: textColor }}
+                    >
+                        {color.toHexString()}
+                        <FaRegCopy style={{ color: textColor }} className="copy-icon" />
+                    </p>
 
-                    ))}
-                </div>
+                ))}
+            </div>
 
-                <h3 style={{ color: textColor }}>Analogous Combination</h3>
-                <div className="combination-group">
-                    {analogousColors.map((color, index) => (
+            <h3 style={{ color: textColor }}>Analogous Combination</h3>
+            <div className="combination-group">
+                {analogousColors.map((color, index) => (
 
-                            <p
-                                onClick={() => copyToClipboard(color.toHexString())}
-                                className="combination"
-                                style={{ backgroundColor: color.toHexString(), color: textColor }}
-                            >
-                                {color.toHexString()}
-                                <FaRegCopy style={{ color: textColor }} className="copy-icon" />
-                            </p>
+                    <p
+                        key={key}
+                        onClick={() => copyToClipboard(color.toHexString())}
+                        className="combination"
+                        style={{ backgroundColor: color.toHexString(), color: textColor }}
+                    >
+                        {color.toHexString()}
+                        <FaRegCopy style={{ color: textColor }} className="copy-icon" />
+                    </p>
 
-                    ))}
-                </div>
+                ))}
+            </div>
+            <h3 style={{ color: textColor }}>Tetrad Combination</h3>
+            <div className="combination-group">
+                {tetradColors.map((color, index) => (
+
+                    <p
+                        key={key}
+                        onClick={() => copyToClipboard(color.toHexString())}
+                        className="combination"
+                        style={{ backgroundColor: color.toHexString(), color: textColor }}
+                    >
+                        {color.toHexString()}
+                        <FaRegCopy style={{ color: textColor }} className="copy-icon" />
+                    </p>
+
+                ))}
+            </div>
 
         </div>
     );
