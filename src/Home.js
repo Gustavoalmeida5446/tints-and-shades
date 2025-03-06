@@ -1,24 +1,25 @@
 import { useState, useEffect } from "react";
 import Logo from "./assets/logo.svg";
-import "./App.css"
+import "./App.css";
 import tinycolor from "tinycolor2";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [hex, setHex] = useState("");
-  const [isDarkColor, setIsDarkColor] = useState(false);
+  const [textColor, setTextColor] = useState("#000000");
   const navigate = useNavigate();
+  const complementary = tinycolor(hex).spin(180).toString();
 
   const generateRandomHex = () => {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
     return `#${randomColor.padStart(6, "0")}`;
   };
+
   useEffect(() => {
     const randomHex = generateRandomHex();
     setHex(randomHex);
     document.body.style.backgroundColor = randomHex;
-    const isDark = tinycolor(randomHex).isDark();
-    setIsDarkColor(isDark);
+    setTextColor(tinycolor.mostReadable(randomHex, ["#ffffff", "#000000"]).toHexString());
   }, []);
 
   const handleChange = (e) => {
@@ -37,8 +38,7 @@ function Home() {
   useEffect(() => {
     if (tinycolor(hex).isValid()) {
       document.body.style.backgroundColor = hex;
-      const isDark = tinycolor(hex).isDark();
-      setIsDarkColor(isDark);
+      setTextColor(tinycolor.mostReadable(hex, ["#ffffff", "#000000"]).toHexString());
     }
   }, [hex]);
 
@@ -56,7 +56,7 @@ function Home() {
 
   return (
     <div className="container">
-      <img src={Logo} alt="Logo" />
+      <img className="logo" src={Logo} alt="Logo" />
       <div className="block">
         <input
           value={hex}
@@ -64,9 +64,13 @@ function Home() {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
-        <button onClick={handleSubmit}>Generate</button>
-        <p className="description"
-          style={{ color: isDarkColor ? "#ffffff" : "#000000", }}        >
+        <button
+          style={{ backgroundColor: complementary, color: textColor }}
+          onClick={handleSubmit}
+        >
+          Generate
+        </button>
+        <p className="description" style={{ color: textColor }}>
           Enter the HEX color code in the field above to generate tints & shades, convert formats, check contrast, and create automatic palettes.
         </p>
       </div>

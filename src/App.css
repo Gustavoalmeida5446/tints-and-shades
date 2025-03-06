@@ -20,6 +20,7 @@ body {
   justify-content: center;
   width: 250px;
 }
+
 .convertions-group {
   display: flex;
   flex-direction: column;
@@ -41,6 +42,7 @@ input {
   margin: 25px 0px 10px 0px;
   text-align: center;
   font-family: "Titillium Web", serif;
+  border-radius: 8px;
 }
 
 button {
@@ -54,13 +56,16 @@ button {
   font-weight: 400;
   text-transform: uppercase;
   font-family: "Titillium Web", serif;
-
+  cursor: pointer;
+  border-radius: 8px;
 }
+
 .description {
   text-align: center;
   font-family: "Titillium Web", serif;
   font-size: 12px;
 }
+
 .convertion {
   text-align: center;
   font-family: "Titillium Web", serif;
@@ -69,18 +74,53 @@ button {
   padding: 8px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   margin: 4px;
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
 }
+
 .copy-icon {
-  cursor: pointer; 
+  cursor: pointer;
   font-size: 16px;
   color: #535353;
 }
+
 h1 {
   text-transform: uppercase;
   font-style: italic;
   font-weight: 900;
   font-size: 36px;
+}
+
+.logo {
+  border-radius: 8px;
+}
+
+.combination {
+  text-align: center;
+  font-family: "Titillium Web", serif;
+  font-size: 16px;
+  padding: 8px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.combination-group {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: center;
+  width: 250px;
+}
+
+@media screen and (max-width: 600px) {
+  .combination-group {
+    display: flex;
+    flex-direction: column;
+  }
 }

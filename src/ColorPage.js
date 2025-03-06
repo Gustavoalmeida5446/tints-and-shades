@@ -11,13 +11,14 @@ function ColorPage() {
     const theColor = tinycolor(mainColor);
 
     const [textColor, setTextColor] = useState("black");
-    const [copyMessage, setCopyMessage] = useState("");
     const complementary = tinycolor(colorHex).spin(180).toString();
+    const analogousColors = tinycolor(mainColor).analogous();
+    const triadColors = tinycolor(mainColor).triad();
 
     useEffect(() => {
         if (theColor.isValid()) {
-            const darkColor = theColor.isDark();
-            setTextColor(darkColor ? "white" : "black");
+            const bestColor = tinycolor.mostReadable(mainColor, ["#000000", "#FFFFFF"]).toHexString();
+            setTextColor(bestColor);
         }
     }, [mainColor]);
 
@@ -27,50 +28,72 @@ function ColorPage() {
         }
     }, [mainColor]);
 
-    useEffect(() => {
-        if (copyMessage) {
-            const timer = setTimeout(() => {
-                setCopyMessage("");
-            }, 2000);
-            return () => clearTimeout(timer);
-        }
-    }, [copyMessage]);
-
     return (
         <div className="container">
             <h1 style={{ color: textColor }} >{mainColor}</h1>
             <div className="convertions-group">
                 <p
-                    onClick={() => copyToClipboard(rgb(theColor), setCopyMessage)}
+                    onClick={() => copyToClipboard(rgb(theColor))}
                     className="convertion">
                     {rgb(theColor)}
                     <FaRegCopy className="copy-icon" />
                 </p>
 
                 <p
-                    onClick={() => copyToClipboard(hsl(theColor), setCopyMessage)}
+                    onClick={() => copyToClipboard(hsl(theColor))}
                     className="convertion">
                     {hsl(theColor)}
                     <FaRegCopy className="copy-icon" />
                 </p>
 
                 <p
-                    onClick={() => copyToClipboard(cmyk(theColor), setCopyMessage)}
+                    onClick={() => copyToClipboard(cmyk(theColor))}
                     className="convertion">
                     {cmyk(theColor)}
                     <FaRegCopy className="copy-icon" />
                 </p>
 
                 <p
-                    onClick={() => copyToClipboard(complementary, setCopyMessage)}
-                    className="convertion" 
+                    onClick={() => copyToClipboard(complementary)}
+                    className="convertion"
                     style={{ backgroundColor: complementary, color: textColor }}
                 >
                     Complementary: {complementary}
-                    <FaRegCopy className="copy-icon" />
+                    <FaRegCopy style={{ color: textColor }} className="copy-icon" />
                 </p>
 
             </div>
+                <h3 style={{ color: textColor }}>Triad Combination</h3>
+                <div className="combination-group">
+                    {triadColors.map((color, index) => (
+
+                            <p
+                                onClick={() => copyToClipboard(color.toHexString())}
+                                className="combination"
+                                style={{ backgroundColor: color.toHexString(), color: textColor }}
+                            >
+                                {color.toHexString()}
+                                <FaRegCopy style={{ color: textColor }} className="copy-icon" />
+                            </p>
+
+                    ))}
+                </div>
+
+                <h3 style={{ color: textColor }}>Analogous Combination</h3>
+                <div className="combination-group">
+                    {analogousColors.map((color, index) => (
+
+                            <p
+                                onClick={() => copyToClipboard(color.toHexString())}
+                                className="combination"
+                                style={{ backgroundColor: color.toHexString(), color: textColor }}
+                            >
+                                {color.toHexString()}
+                                <FaRegCopy style={{ color: textColor }} className="copy-icon" />
+                            </p>
+
+                    ))}
+                </div>
 
         </div>
     );
