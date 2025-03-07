@@ -28,19 +28,10 @@ export const cmyk = (colorHex) => {
 
 export const copyToClipboard = (text) => {
   navigator.clipboard.writeText(text).then(() => {
-    // alert(`${text} copiado`)
 
     const alertBox = document.createElement("div");
     alertBox.textContent = `${text} copied`;
-    alertBox.style.position = "fixed";
-    alertBox.style.bottom = "20px";
-    alertBox.style.left = "50%";
-    alertBox.style.transform = "translateX(-50%)";
-    alertBox.style.background = "black";
-    alertBox.style.color = "white";
-    alertBox.style.padding = "10px 20px";
-    alertBox.style.borderRadius = "5px";
-    alertBox.style.zIndex = "1000";
+    alertBox.classList.add("alert-box"); 
     document.body.appendChild(alertBox);
 
     setTimeout(() => {

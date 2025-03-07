@@ -9,6 +9,7 @@ function Home() {
   const [textColor, setTextColor] = useState("#000000");
   const navigate = useNavigate();
   const complementary = tinycolor(hex).complement().toHexString();
+  const buttonTextColor = tinycolor.mostReadable(complementary, ["#ffffff", "#000000"]).toHexString();
 
   const generateRandomHex = () => {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -64,7 +65,7 @@ function Home() {
           onKeyDown={handleKeyDown}
         />
         <button
-          style={{ backgroundColor: complementary, color: textColor }}
+          style={{ backgroundColor: complementary, color: buttonTextColor }}
           onClick={handleSubmit}
         >
           Generate

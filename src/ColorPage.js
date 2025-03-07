@@ -15,6 +15,8 @@ function ColorPage() {
     const tetradColors = tetrad(mainColor);
     const shadesColors = shades(mainColor);
     const tintsColors = tints(mainColor);
+    const complementary = tinycolor(colorHex).complement().toHexString();
+    const buttonTextColor = tinycolor.mostReadable(complementary, ["#ffffff", "#000000"]).toHexString();
 
     useEffect(() => {
         if (theColor.isValid()) {
@@ -127,16 +129,16 @@ function ColorPage() {
 
             </div>
 
-            <footer className="footer">
+            <footer className="footer" style={{ backgroundColor: mainColor, color: textColor }}>
                 <div className="footer-content">
-                    <button className="back-button" onClick={() => window.history.back()}>
-                        Voltar
+                    <button className="back-button" style={{ backgroundColor: complementary, color: buttonTextColor }} onClick={() => window.history.back()}>
+                        Generate Another Color
                     </button>
                     <div className="info">
                         <p>© 2025 Gustavo Almeida - All rights reserved</p>
                         <p>
-                            <a href="https://github.com/gustavoalmeida5446" target="_blank" rel="noopener noreferrer">
-                            Visit my GitHub
+                            <a href="https://github.com/gustavoalmeida5446" style={{ color: textColor }} target="_blank" rel="noopener noreferrer">
+                                Visit my GitHub
                             </a>
                         </p>
                     </div>
