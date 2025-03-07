@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
-import Logo from "./assets/logo.svg";
+import { useState, useEffect, useRef } from "react";
+import {
+  tetrad
+} from "./Utils"
 import "./App.css";
 import tinycolor from "tinycolor2";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +12,21 @@ function Home() {
   const navigate = useNavigate();
   const complementary = tinycolor(hex).complement().toHexString();
   const buttonTextColor = tinycolor.mostReadable(complementary, ["#ffffff", "#000000"]).toHexString();
+  const inputRef = useRef(null);
+
+  const [tetradColors, settetradColors] = useState([]);
+  useEffect(() => {
+    if (tinycolor(hex).isValid()) {
+      document.body.style.backgroundColor = hex;
+      setTextColor(tinycolor.mostReadable(hex, ["#ffffff", "#000000"]).toHexString());
+      settetradColors(tetrad(hex));
+    }
+  }, [hex]);
+
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const generateRandomHex = () => {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -24,17 +41,18 @@ function Home() {
   }, []);
 
   const handleChange = (e) => {
-    let value = e.target.value.trim();
+    let value = e.target.value.trim().toUpperCase();
 
-    if (!value.startsWith("#") && value.length > 0) {
-      value = `#${value}`;
+    if (value.startsWith("#")) {
+      value = `#${value.slice(1).replace(/[^0-9A-F]/g, "").slice(0, 6)}`;
+    } else {
+      value = `#${value.replace(/[^0-9A-F]/g, "").slice(0, 6)}`;
     }
 
-    const isValid = /^#?[0-9A-Fa-f]{0,6}$/.test(value);
-    if (isValid) {
-      setHex(value);
-    }
+    setHex(value);
   };
+
+
 
   useEffect(() => {
     if (tinycolor(hex).isValid()) {
@@ -56,10 +74,36 @@ function Home() {
   };
 
   return (
-    <div className="container">
-      <img className="logo" src={Logo} alt="Logo" />
+    <div className="container-home">
+
+      <div class="logo">
+        <div class="square"
+          style={{
+            background: `linear-gradient(45deg, ${tetradColors[3]?.hex}, ${tetradColors[1]?.hex})`,
+          }}
+        >
+        </div>
+        <div className="text">
+          <div
+            className="color"
+            style={{ color: textColor }}
+          >
+            COLOR
+          </div>
+          <div
+            className="toolkit"
+            style={{ color: textColor }}
+          >
+            toolkit
+          </div>
+        </div>
+      </div>
+
       <div className="block">
         <input
+          type="text"
+          minlength="4"
+          maxlength="7"
           placeholder={hex}
           onChange={handleChange}
           onKeyDown={handleKeyDown}

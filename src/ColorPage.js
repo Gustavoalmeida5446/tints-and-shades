@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import tinycolor from "tinycolor2";
-import { rgb, hsl, cmyk, copyToClipboard, triad, tetrad, shades, tints } from "./Utils"
+import {
+    rgb,
+    hsl,
+    cmyk,
+    copyToClipboard,
+    triad,
+    tetrad,
+    shades,
+    tints
+} from "./Utils"
 import { FaRegCopy } from "react-icons/fa6";
 import "./App.css";
 
@@ -92,7 +101,7 @@ function ColorPage() {
                     })}
                 </div>
 
-                <h3>Triad Combination</h3>
+                <h3>Triad Combination + Complementary Color</h3>
                 <div className="combination-group">
                     {triadColors.map((colorObj) => {
                         const triadTextColor = tinycolor.mostReadable(colorObj.hex, ["#000000", "#FFFFFF"]).toHexString();
@@ -107,6 +116,14 @@ function ColorPage() {
                             </p>
                         );
                     })}
+                            <p
+                                onClick={() => copyToClipboard(complementary)}
+                                className="code"
+                                style={{ backgroundColor: complementary, color: buttonTextColor }}
+                            >
+                                Complementary: {complementary} <FaRegCopy style={{ color: buttonTextColor }} className="copy-icon" />
+                            </p>
+
                 </div>
 
                 <h3>Tetrad Combination</h3>
@@ -125,8 +142,6 @@ function ColorPage() {
                         );
                     })}
                 </div>
-
-
 
             </div>
 

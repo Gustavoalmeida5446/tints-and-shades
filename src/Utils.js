@@ -58,6 +58,15 @@ export const tetrad = (colorHex) => {
   }));
 };
 
+export const complement = (colorHex) => {
+  const mainColor = tinycolor(colorHex);
+  return mainColor.splitcomplement().map((color, index) => ({
+    color: color,
+    hex: color.toHexString(),
+    id: `splitComplement-${index}`,
+  }));
+};
+
 export const shades = (colorHex) => {
   return Array.from({ length: 10 }, (_, i) => {
     const percentage = (i / 9) * 100;
