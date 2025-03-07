@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import tinycolor from "tinycolor2";
 import { rgb, hsl, cmyk, copyToClipboard, triad, tetrad, shades, tints } from "./Utils"
 import { FaRegCopy } from "react-icons/fa6";
@@ -8,7 +8,8 @@ import "./App.css";
 function ColorPage() {
     const { colorHex } = useParams();
     const mainColor = `#${colorHex}`;
-    const theColor = tinycolor(mainColor);
+    const theColor = tinycolor(`#${colorHex}`);
+    const navigate = useNavigate();
 
     const [textColor, setTextColor] = useState("black");
     const triadColors = triad(mainColor);
@@ -131,15 +132,11 @@ function ColorPage() {
 
             <footer className="footer" style={{ backgroundColor: mainColor, color: textColor }}>
                 <div className="footer-content">
-                    <button className="back-button" style={{ backgroundColor: complementary, color: buttonTextColor }} onClick={() => window.history.back()}>
+                    <button className="back-button" style={{ backgroundColor: complementary, color: buttonTextColor }} onClick={() => navigate("/")}>
                         Generate Another Color
                     </button>
                     <div className="info">
-                        <p>© 2025 Gustavo Almeida - All rights reserved</p>
-                        <p>
-                            <a href="https://github.com/gustavoalmeida5446" style={{ color: textColor }} target="_blank" rel="noopener noreferrer">
-                                Visit my GitHub
-                            </a>
+                        <p>© 2025 Gustavo Almeida - <a href="https://github.com/gustavoalmeida5446" style={{ color: textColor }} target="_blank" rel="noopener noreferrer">Visit my GitHub</a>
                         </p>
                     </div>
                 </div>
