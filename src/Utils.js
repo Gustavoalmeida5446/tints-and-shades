@@ -28,7 +28,24 @@ export const cmyk = (colorHex) => {
 
 export const copyToClipboard = (text) => {
   navigator.clipboard.writeText(text).then(() => {
-    console.log("copied");
+    // alert(`${text} copiado`)
+
+    const alertBox = document.createElement("div");
+    alertBox.textContent = `${text} copied`;
+    alertBox.style.position = "fixed";
+    alertBox.style.bottom = "20px";
+    alertBox.style.left = "50%";
+    alertBox.style.transform = "translateX(-50%)";
+    alertBox.style.background = "black";
+    alertBox.style.color = "white";
+    alertBox.style.padding = "10px 20px";
+    alertBox.style.borderRadius = "5px";
+    alertBox.style.zIndex = "1000";
+    document.body.appendChild(alertBox);
+
+    setTimeout(() => {
+      alertBox.remove();
+    }, 1000);
   });
 };
 
@@ -50,11 +67,26 @@ export const tetrad = (colorHex) => {
   }));
 };
 
-// export const shades = (colorHex) => {
-  // const mainColor = tinycolor(colorHex);
-  // return mainColor.darken(50).map((color, index) => ({
-  //   color: color,
-  //   hex: color.toHexString(),
-  //   id: `shades-${index}`,
-  // }));
-// };
+export const shades = (colorHex) => {
+  return Array.from({ length: 10 }, (_, i) => {
+    const percentage = (i / 9) * 100;
+    return {
+      hex: tinycolor.mix(colorHex, "#000000", percentage).toHexString(),
+      id: `shade-${i}`,
+    }
+  });
+};
+
+export const tints = (colorHex) => {
+  return Array.from({ length: 10 }, (_, i) => {
+    const percentage = (i / 9) * 100;
+    return {
+      hex: tinycolor.mix(colorHex, "#ffffff", percentage).toHexString(),
+      id: `tint-${i}`,
+    }
+  });
+};
+
+export const getTextColor = (hexColor) => {
+  return tinycolor.mostReadable(hexColor, ["#000000", "#FFFFFF"]).toHexString();
+};
