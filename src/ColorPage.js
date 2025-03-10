@@ -51,8 +51,12 @@ function ColorPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const inputColor = e.target.elements.contrastInput.value;
-        if (tinycolor(inputColor).isValid()) {
+        let inputColor = e.target.elements.contrastInput.value;
+
+        if (inputColor.startsWith("#")) {
+            inputColor = inputColor.slice(1);
+        }
+        if (tinycolor(`#${inputColor}`).isValid()) {
             setContrastColor(inputColor);
             console.log("Contrast Color Updated:", inputColor);
         } else {
@@ -171,7 +175,7 @@ function ColorPage() {
                 </div>
 
                 <h3>Contrast</h3>
-                <div className="combination-group">
+                <div className="contrast-group">
 
                     <div
                         className="contrast-info"

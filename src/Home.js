@@ -3,8 +3,9 @@ import {
   tetrad
 } from "./Utils"
 import "./App.css";
-import tinycolor from "tinycolor2";
+import tinycolor, { random } from "tinycolor2";
 import { useNavigate } from "react-router-dom";
+import { FaRandom } from "react-icons/fa";
 
 function Home() {
   const [hex, setHex] = useState("");
@@ -52,7 +53,10 @@ function Home() {
     setHex(value);
   };
 
-
+  const handleRandomColor = () => {
+    const randomHex = generateRandomHex();
+    setHex(randomHex);
+  };
 
   useEffect(() => {
     if (tinycolor(hex).isValid()) {
@@ -101,7 +105,7 @@ function Home() {
 
       <div className="block">
         <input
-        className="home-input"
+          className="home-input"
           type="text"
           minLength="4"
           maxLength="7"
@@ -110,7 +114,7 @@ function Home() {
           onKeyDown={handleKeyDown}
         />
         <button
-        className="home-button"
+          className="home-button"
           style={{ backgroundColor: complementary, color: buttonTextColor }}
           onClick={handleSubmit}
         >
@@ -119,6 +123,14 @@ function Home() {
         <p className="description" style={{ color: textColor }}>
           Enter the HEX color code in the field above to generate tints & shades, convert formats, check contrast, and create automatic palettes.
         </p>
+
+        <button
+          className="random-button"
+          style={{ color: textColor }}
+          onClick={handleRandomColor}
+        >
+          <FaRandom /> random color
+        </button>
       </div>
     </div>
   );
