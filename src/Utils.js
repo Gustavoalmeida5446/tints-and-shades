@@ -90,3 +90,14 @@ export const tints = (colorHex) => {
 export const getTextColor = (hexColor) => {
   return tinycolor.mostReadable(hexColor, ["#000000", "#FFFFFF"]).toHexString();
 };
+
+export const contrastRatio = (color1, color2) => {
+  return tinycolor.readability(color1, color2);
+};
+
+export const isAccessible = (color1, color2, level = "AA") => {
+  const ratio = contrastRatio(color1, color2);
+  if (level === "AA") return ratio >= 4.5;
+  if (level === "AAA") return ratio >= 7;
+  return false;
+};

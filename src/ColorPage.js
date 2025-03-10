@@ -9,9 +9,11 @@ import {
     triad,
     tetrad,
     shades,
-    tints
+    tints,
+    isAccessible,
+    contrastRatio
 } from "./Utils"
-import { FaRegCopy } from "react-icons/fa6";
+import { FaRegCopy, FaCheck, FaXmark } from "react-icons/fa6";
 import "./App.css";
 
 function ColorPage() {
@@ -27,15 +29,36 @@ function ColorPage() {
     const tintsColors = tints(mainColor);
     const complementary = tinycolor(colorHex).complement().toHexString();
     const buttonTextColor = tinycolor.mostReadable(complementary, ["#ffffff", "#000000"]).toHexString();
+    const [contrastColor, setContrastColor] = useState("#000000");
+    const theContrastColor = tinycolor(`#${contrastColor}`);
+
 
     useEffect(() => {
         if (theColor.isValid()) {
             const bestColor = tinycolor.mostReadable(mainColor, ["#000000", "#FFFFFF"]).toHexString();
             setTextColor(bestColor);
+        } else {
+            navigate("/");
         }
-    }, [mainColor]);
+    }, [mainColor, theColor, navigate]);
 
-    document.body.style.backgroundColor = "#e7e7e7";
+    useEffect(() => {
+        document.body.style.backgroundColor = "#e7e7e7";
+        return () => {
+            document.body.style.backgroundColor = "";
+        };
+    }, []);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const inputColor = e.target.elements.contrastInput.value;
+        if (tinycolor(inputColor).isValid()) {
+            setContrastColor(inputColor);
+            console.log("Contrast Color Updated:", inputColor);
+        } else {
+            alert("Please enter a valid hex color (ex: #ffffff).");
+        }
+    };
 
     return (
         <>
@@ -66,6 +89,18 @@ function ColorPage() {
                 </div>
             </div>
             <div className="container">
+
+                <h3>Complementary</h3>
+                <div className="combination-group">
+                    <p
+                        onClick={() => copyToClipboard(complementary)}
+                        className="code"
+                        style={{ backgroundColor: complementary, color: buttonTextColor }}
+                    >
+                        {complementary} <FaRegCopy style={{ color: buttonTextColor }} className="copy-icon" />
+                    </p>
+                </div>
+
                 <h3>Tints</h3>
                 <div className="combination-group">
                     {tintsColors.map((colorObj) => {
@@ -101,7 +136,7 @@ function ColorPage() {
                     })}
                 </div>
 
-                <h3>Triad Combination + Complementary Color</h3>
+                <h3>Triad Combination</h3>
                 <div className="combination-group">
                     {triadColors.map((colorObj) => {
                         const triadTextColor = tinycolor.mostReadable(colorObj.hex, ["#000000", "#FFFFFF"]).toHexString();
@@ -116,14 +151,6 @@ function ColorPage() {
                             </p>
                         );
                     })}
-                            <p
-                                onClick={() => copyToClipboard(complementary)}
-                                className="code"
-                                style={{ backgroundColor: complementary, color: buttonTextColor }}
-                            >
-                                Complementary: {complementary} <FaRegCopy style={{ color: buttonTextColor }} className="copy-icon" />
-                            </p>
-
                 </div>
 
                 <h3>Tetrad Combination</h3>
@@ -143,11 +170,124 @@ function ColorPage() {
                     })}
                 </div>
 
-            </div>
+                <h3>Contrast</h3>
+                <div className="combination-group">
+
+                    <div
+                        className="contrast-info"
+                        style={{ backgroundColor: "white", color: mainColor }}
+                    >
+                        <h4>White Background</h4>
+                        <p>Contrast Ratio: <strong>{contrastRatio("white", mainColor).toFixed(2)}</strong></p>
+                        <p>
+                            AA: {isAccessible("white", mainColor, "AA") ? (
+                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
+                            ) : (
+                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
+                            )}
+                        </p>
+                        <p>
+                            AAA: {isAccessible("white", mainColor, "AAA") ? (
+                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
+                            ) : (
+                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
+                            )}
+                        </p>
+                    </div>
+
+                    <div
+                        className="contrast-info"
+                        style={{ backgroundColor: "black", color: mainColor }}
+                    >
+                        <h4>Black Background</h4>
+                        <p>Contrast Ratio: <strong>{contrastRatio("black", mainColor).toFixed(2)}</strong></p>
+                        <p>
+                            AA: {isAccessible("black", mainColor, "AA") ? (
+                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
+                            ) : (
+                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
+                            )}
+                        </p>
+                        <p>
+                            AAA: {isAccessible("black", mainColor, "AAA") ? (
+                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
+                            ) : (
+                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
+                            )}
+                        </p>
+                    </div>
+
+                    <div
+                        className="contrast-info"
+                        style={{ backgroundColor: complementary, color: mainColor }}
+                    >
+                        <h4>Complementary Color Background</h4>
+                        <p>Contrast Ratio: <strong>{contrastRatio(complementary, mainColor).toFixed(2)}</strong></p>
+                        <p>
+                            AA: {isAccessible(complementary, mainColor, "AA") ? (
+                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
+                            ) : (
+                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
+                            )}
+                        </p>
+                        <p>
+                            AAA: {isAccessible(complementary, mainColor, "AAA") ? (
+                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
+                            ) : (
+                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
+                            )}
+                        </p>
+                    </div>
+
+                    <div
+                        className="contrast-info"
+                        style={{ backgroundColor: mainColor}}
+                    >
+                        <h4 style={{ color: theContrastColor }}>Contrast Checker</h4>
+                        <form onSubmit={handleSubmit}>
+                            <input
+                                id="contrastInput"
+                                className="contrast-input"
+                                type="text"
+                                minLength="4"
+                                maxLength="7"
+                                placeholder="#000000"
+                            />
+                            <button
+                                type="submit"
+                                className="contrast-button"
+                                style={{ backgroundColor: textColor, color: mainColor }}
+                            >
+                                Check
+                            </button>
+                        </form>
+
+                        <div style={{ color: theContrastColor }}>
+                            <p>Contrast Ratio: <strong>{contrastRatio(contrastColor, mainColor).toFixed(2)}</strong></p>
+                            <p>
+                                AA: {isAccessible(contrastColor, mainColor, "AA") ? (
+                                    <span className="contrast-text-pass"><FaCheck /> Pass</span>
+                                ) : (
+                                    <span className="contrast-text-fail"><FaXmark /> Fail</span>
+                                )}
+                            </p>
+                            <p>
+                                AAA: {isAccessible(contrastColor, mainColor, "AAA") ? (
+                                    <span className="contrast-text-pass"><FaCheck /> Pass</span>
+                                ) : (
+                                    <span className="contrast-text-fail"><FaXmark /> Fail</span>
+                                )}
+                            </p>
+                        </div>
+                    </div>
+
+                </div >
+
+            </div >
 
             <footer className="footer" style={{ backgroundColor: mainColor, color: textColor }}>
                 <div className="footer-content">
-                    <button className="back-button" style={{ backgroundColor: complementary, color: buttonTextColor }} onClick={() => navigate("/")}>
+                    <button className="back-button" style={{ backgroundColor: "white", color: "black" }} onClick={() => navigate("/")}>
                         Generate Another Color
                     </button>
                     <div className="info">

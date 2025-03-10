@@ -76,8 +76,8 @@ function Home() {
   return (
     <div className="container-home">
 
-      <div class="logo">
-        <div class="square"
+      <div className="logo">
+        <div className="square"
           style={{
             background: `linear-gradient(45deg, ${tetradColors[3]?.hex}, ${tetradColors[1]?.hex})`,
           }}
@@ -101,14 +101,16 @@ function Home() {
 
       <div className="block">
         <input
+        className="home-input"
           type="text"
-          minlength="4"
-          maxlength="7"
+          minLength="4"
+          maxLength="7"
           placeholder={hex}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
         <button
+        className="home-button"
           style={{ backgroundColor: complementary, color: buttonTextColor }}
           onClick={handleSubmit}
         >

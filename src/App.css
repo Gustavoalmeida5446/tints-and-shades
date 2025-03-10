@@ -13,6 +13,7 @@ body {
   padding: 20px;
 
 }
+
 .container-home {
   display: flex;
   flex-direction: column;
@@ -30,7 +31,7 @@ body {
   width: 250px;
 }
 
-input {
+.home-input {
   padding: 10px 4px;
   width: 100%;
   background-color: #ffffff;
@@ -46,7 +47,7 @@ input {
   border-radius: 8px;
 }
 
-button {
+.home-button {
   padding: 4px;
   width: 100%;
   background-color: #007bff;
@@ -132,10 +133,6 @@ h3 {
   text-align: center;
   top: 0;
 }
-
-/* .logo {
-  border-radius: 8px;
-} */
 
 .combination {
   text-align: center;
@@ -279,4 +276,43 @@ h3 {
   line-height: 0.8;
   letter-spacing: 4px;
 
+}
+
+.contrast-info {
+  text-align: left;
+  font-family: "Titillium Web", serif;
+  font-size: 16px;
+  padding: 8px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin: 4px;
+  flex-direction: column;
+  border-radius: 8px;
+  width: 250px;
+}
+
+.contrast-text-fail {
+  color: #ff0000;
+}
+
+.contrast-input {
+  padding: 4px;
+  background-color: #ffffff;
+  color: rgb(75, 75, 75);
+  border: none;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: "Titillium Web", serif;
+  border-radius: 8px;
+}
+
+.contrast-button {
+  padding: 4px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: "Titillium Web", serif;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-left: 12px;
 }
