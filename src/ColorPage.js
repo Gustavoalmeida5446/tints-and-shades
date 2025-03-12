@@ -298,6 +298,14 @@ function ColorPage() {
                         <p>© 2025 Gustavo Almeida - <a href="https://github.com/gustavoalmeida5446" style={{ color: textColor }} target="_blank" rel="noopener noreferrer">Visit my GitHub</a>
                         </p>
                     </div>
+                    <button
+  type="button"
+  onClick={() => {
+    throw new Error("Sentry Test Error");
+  }}
+>
+  Break the world
+</button>
                 </div>
             </footer>
 
