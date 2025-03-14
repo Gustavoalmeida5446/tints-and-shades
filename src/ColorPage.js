@@ -68,10 +68,10 @@ function ColorPage() {
         <>
             <div className="header" style={{ backgroundColor: mainColor }}>
                 <h1 style={{ color: textColor }} >{mainColor}</h1>
-               
+
             </div>
-            <div className="initial" style={{ backgroundColor: mainColor }}>
-                <h1 style={{ color: textColor }} >{mainColor}</h1>
+            <div className="top-info" style={{ backgroundColor: mainColor }}>
+                <div id="spacer" style={{ height: 120 }} />
                 <div className="convertions-group" style={{ color: textColor }}>
                     <p
                         onClick={() => copyToClipboard(rgb(theColor))}
@@ -96,17 +96,24 @@ function ColorPage() {
 
                 </div>
             </div>
-            <div id="spacer" style={{ height: 150 }} />
             <div className="container">
 
                 <h3>Complementary</h3>
                 <div className="combination-group">
                     <p
-                        onClick={() => navigate(`/color/${complementary.slice(1)}`)}
                         className="code"
                         style={{ backgroundColor: complementary, color: buttonTextColor }}
                     >
-                        {complementary} <FaRegCopy style={{ color: buttonTextColor }} className="copy-icon" onClick={() => copyToClipboard(complementary)}
+                        <span
+                            onClick={() => navigate(`/color/${complementary.slice(1)}`)}
+                        >
+
+                            {complementary}
+                        </span>
+                        <FaRegCopy
+                            style={{ color: buttonTextColor }}
+                            className="copy-icon"
+                            onClick={() => copyToClipboard(complementary)}
                         />
                     </p>
                 </div>
@@ -121,13 +128,16 @@ function ColorPage() {
                                 key={colorObj.id}
                                 className="code"
                                 style={{ backgroundColor: colorObj.hex, color: tintsTextColor }}
-                                onClick={() => navigate(`/color/${colorObj.hex.slice(1)}`)}
+                            >
+                                <span
+                                    onClick={() => navigate(`/color/${colorObj.hex.slice(1)}`)}
                                 >
-                                {colorObj.hex} 
-                                <FaRegCopy 
-                                style={{ color: tintsTextColor }} 
-                                onClick={() => copyToClipboard(colorObj.hex)}
-                                className="copy-icon" 
+                                    {colorObj.hex}
+                                </span>
+                                <FaRegCopy
+                                    style={{ color: tintsTextColor }}
+                                    onClick={() => copyToClipboard(colorObj.hex)}
+                                    className="copy-icon"
                                 />
                             </p>
                         );
@@ -142,14 +152,17 @@ function ColorPage() {
                             <p
                                 key={colorObj.id}
                                 className="code"
-                                onClick={() => navigate(`/color/${colorObj.hex.slice(1)}`)}
                                 style={{ backgroundColor: colorObj.hex, color: shadesTextColor }}
+                            >
+                                <span
+                                    onClick={() => navigate(`/color/${colorObj.hex.slice(1)}`)}
                                 >
-                                {colorObj.hex} 
-                                <FaRegCopy 
-                                style={{ color: shadesTextColor }} 
-                                onClick={() => copyToClipboard(colorObj.hex)}
-                                className="copy-icon" 
+                                    {colorObj.hex}
+                                </span>
+                                <FaRegCopy
+                                    style={{ color: shadesTextColor }}
+                                    onClick={() => copyToClipboard(colorObj.hex)}
+                                    className="copy-icon"
                                 />
                             </p>
                         );
@@ -163,15 +176,18 @@ function ColorPage() {
                         return (
                             <p
                                 key={colorObj.id}
-                                onClick={() => navigate(`/color/${colorObj.hex.slice(1)}`)}
                                 className="code"
                                 style={{ backgroundColor: colorObj.hex, color: triadTextColor }}
+                            >
+                                <span
+                                    onClick={() => navigate(`/color/${colorObj.hex.slice(1)}`)}
                                 >
-                                {colorObj.hex} 
-                                <FaRegCopy 
-                                style={{ color: triadTextColor }} 
-                                onClick={() => copyToClipboard(colorObj.hex)}
-                                className="copy-icon" 
+                                    {colorObj.hex}
+                                </span>
+                                <FaRegCopy
+                                    style={{ color: triadTextColor }}
+                                    onClick={() => copyToClipboard(colorObj.hex)}
+                                    className="copy-icon"
                                 />
                             </p>
                         );
@@ -187,13 +203,16 @@ function ColorPage() {
                                 key={colorObj.id}
                                 className="code"
                                 style={{ backgroundColor: colorObj.hex, color: tetradTextColor }}
-                                onClick={() => navigate(`/color/${colorObj.hex.slice(1)}`)}
                             >
-                                {colorObj.hex}
-                                 <FaRegCopy 
-                                 style={{ color: tetradTextColor }} 
-                                 className="copy-icon" 
-                                 onClick={() => copyToClipboard(colorObj.hex)}
+                                <span
+                                    onClick={() => navigate(`/color/${colorObj.hex.slice(1)}`)}
+                                >
+                                    {colorObj.hex}
+                                </span>
+                                <FaRegCopy
+                                    style={{ color: tetradTextColor }}
+                                    className="copy-icon"
+                                    onClick={() => copyToClipboard(colorObj.hex)}
                                 />
                             </p>
                         );

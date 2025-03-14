@@ -24,9 +24,18 @@ function Home() {
     }
   }, [hex]);
 
+  const handleInputFocus = () => {
+    inputRef.current.select()
+  };
 
   useEffect(() => {
-    inputRef.current?.focus();
+    inputRef.current?.addEventListener('focus', () => {
+      handleInputFocus()
+    })
+
+    return () => {
+      inputRef.current?.removeEventListener('focus', handleInputFocus)
+    }
   }, []);
 
   const generateRandomHex = () => {
@@ -42,15 +51,9 @@ function Home() {
   }, []);
 
   const handleChange = (e) => {
-    let value = e.target.value.trim().toUpperCase();
-
-    if (value.startsWith("#")) {
-      value = `#${value.slice(1).replace(/[^0-9A-F]/g, "").slice(0, 6)}`;
-    } else {
-      value = `#${value.replace(/[^0-9A-F]/g, "").slice(0, 6)}`;
-    }
-
-    setHex(value);
+    const value = e.target.value.trim().toUpperCase();
+    const formattedValue = value.replace('#', '').replace(/[^0-9A-F]/g, "").slice(0, 6);
+    setHex(formattedValue);
   };
 
   const handleRandomColor = () => {
@@ -110,7 +113,9 @@ function Home() {
           minLength="4"
           maxLength="7"
           placeholder={hex}
+          ref={inputRef}
           onChange={handleChange}
+          value={hex}
           onKeyDown={handleKeyDown}
         />
         <button
