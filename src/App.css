@@ -132,6 +132,15 @@ h3 {
   padding: 1px 0px;
   text-align: center;
   top: 0;
+  position: fixed;
+}
+.initial {
+  width: 100%;
+  margin: 0;
+  padding: 1px 0px;
+  text-align: center;
+  top: 0;
+  margin-top: 100;
 }
 
 .combination {
@@ -319,9 +328,9 @@ h3 {
 .contrast-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
   align-items: stretch;
   justify-content: center;
+  margin: 30px;
 }
 
 .random-button {
