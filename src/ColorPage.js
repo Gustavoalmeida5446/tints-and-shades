@@ -224,72 +224,6 @@ function ColorPage() {
 
                     <div
                         className="contrast-info"
-                        style={{ backgroundColor: "white", color: mainColor }}
-                    >
-                        <h4>White Background</h4>
-                        <p>Contrast Ratio: <strong>{contrastRatio("white", mainColor).toFixed(2)}</strong></p>
-                        <p>
-                            AA: {isAccessible("white", mainColor, "AA") ? (
-                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
-                            ) : (
-                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
-                            )}
-                        </p>
-                        <p>
-                            AAA: {isAccessible("white", mainColor, "AAA") ? (
-                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
-                            ) : (
-                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
-                            )}
-                        </p>
-                    </div>
-
-                    <div
-                        className="contrast-info"
-                        style={{ backgroundColor: "black", color: mainColor }}
-                    >
-                        <h4>Black Background</h4>
-                        <p>Contrast Ratio: <strong>{contrastRatio("black", mainColor).toFixed(2)}</strong></p>
-                        <p>
-                            AA: {isAccessible("black", mainColor, "AA") ? (
-                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
-                            ) : (
-                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
-                            )}
-                        </p>
-                        <p>
-                            AAA: {isAccessible("black", mainColor, "AAA") ? (
-                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
-                            ) : (
-                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
-                            )}
-                        </p>
-                    </div>
-
-                    <div
-                        className="contrast-info"
-                        style={{ backgroundColor: complementary, color: mainColor }}
-                    >
-                        <h4>Complementary Color Background</h4>
-                        <p>Contrast Ratio: <strong>{contrastRatio(complementary, mainColor).toFixed(2)}</strong></p>
-                        <p>
-                            AA: {isAccessible(complementary, mainColor, "AA") ? (
-                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
-                            ) : (
-                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
-                            )}
-                        </p>
-                        <p>
-                            AAA: {isAccessible(complementary, mainColor, "AAA") ? (
-                                <span className="contrast-text-pass"><FaCheck /> Pass</span>
-                            ) : (
-                                <span className="contrast-text-fail"><FaXmark /> Fail</span>
-                            )}
-                        </p>
-                    </div>
-
-                    <div
-                        className="contrast-info"
                         style={{ backgroundColor: mainColor }}
                     >
                         <h4 style={{ color: theContrastColor }}>Contrast Checker</h4>
@@ -328,6 +262,14 @@ function ColorPage() {
                                 )}
                             </p>
                         </div>
+                        {/* <button
+    type="button"
+    className="contrast-button"
+    style={{ backgroundColor: theContrastColor, color: mainColor }}
+    onClick={alert.bind(this, `Contrast Color: ${theContrastColor}`)}
+>
+    Swap Colors
+</button> */}
                     </div>
 
                 </div >

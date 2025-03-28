@@ -107,17 +107,17 @@ function Home() {
       </div>
 
       <div className="block">
-        <input
-          className="home-input"
-          type="text"
-          minLength="4"
-          maxLength="7"
-          placeholder={hex}
-          ref={inputRef}
-          onChange={handleChange}
-          value={hex}
-          onKeyDown={handleKeyDown}
-        />
+          <input
+            className="home-input"
+            type="text"
+            minLength="4"
+            maxLength="7"
+            placeholder={hex}
+            ref={inputRef}
+            onChange={handleChange}
+            value={hex}
+            onKeyDown={handleKeyDown}
+          />
         <button
           className="home-button"
           style={{ backgroundColor: complementary, color: buttonTextColor }}

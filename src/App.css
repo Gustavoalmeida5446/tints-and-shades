@@ -32,18 +32,18 @@ body {
 }
 
 .home-input {
-  padding: 10px 4px;
-  width: 100%;
+  padding: 0px 4px;
+  width: 80%;
   background-color: #ffffff;
   color: rgb(75, 75, 75);
   font-size: 36px;
   border: none;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   font-weight: 800;
   text-transform: uppercase;
+  font-family: "Titillium Web", serif;
   margin: 25px 0px 10px 0px;
   text-align: center;
-  font-family: "Titillium Web", serif;
+  width: 100%;
   border-radius: 8px;
 }
 
