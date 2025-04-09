@@ -3,7 +3,7 @@ import {
   tetrad
 } from "./Utils"
 import "./App.css";
-import tinycolor, { random } from "tinycolor2";
+import tinycolor from "tinycolor2";
 import { useNavigate } from "react-router-dom";
 import { FaRandom } from "react-icons/fa";
 
@@ -28,16 +28,6 @@ function Home() {
     inputRef.current.select()
   };
 
-  useEffect(() => {
-    inputRef.current?.addEventListener('focus', () => {
-      handleInputFocus()
-    })
-
-    return () => {
-      inputRef.current?.removeEventListener('focus', handleInputFocus)
-    }
-  }, []);
-
   const generateRandomHex = () => {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
     return `#${randomColor.padStart(6, "0")}`;
@@ -53,20 +43,13 @@ function Home() {
   const handleChange = (e) => {
     const value = e.target.value.trim().toUpperCase();
     const formattedValue = value.replace('#', '').replace(/[^0-9A-F]/g, "").slice(0, 6);
-    setHex(formattedValue);
+    setHex(`#${formattedValue}`);
   };
 
   const handleRandomColor = () => {
     const randomHex = generateRandomHex();
     setHex(randomHex);
   };
-
-  useEffect(() => {
-    if (tinycolor(hex).isValid()) {
-      document.body.style.backgroundColor = hex;
-      setTextColor(tinycolor.mostReadable(hex, ["#ffffff", "#000000"]).toHexString());
-    }
-  }, [hex]);
 
   const handleSubmit = () => {
     if (tinycolor(hex).isValid()) {
@@ -117,6 +100,7 @@ function Home() {
             onChange={handleChange}
             value={hex}
             onKeyDown={handleKeyDown}
+            onFocus={handleInputFocus}
           />
         <button
           className="home-button"
