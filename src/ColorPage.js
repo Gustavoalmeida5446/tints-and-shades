@@ -15,6 +15,12 @@ import {
 } from "./Utils"
 import { FaRegCopy, FaCheck, FaXmark } from "react-icons/fa6";
 import "./App.css";
+import {
+    EmailShareButton,
+    EmailIcon, 
+    WhatsappShareButton,
+    WhatsappIcon,
+} from 'react-share';
 
 function ColorPage() {
     const { colorHex } = useParams();
@@ -63,6 +69,8 @@ function ColorPage() {
             alert("Please enter a valid hex color (ex: #ffffff).");
         }
     };
+
+    const shareUrl = `https://gustavoalmeida5446.github.io/tints-and-shades/#/color/${colorHex}`;
 
     return (
         <>
@@ -274,9 +282,41 @@ function ColorPage() {
 
                 </div >
 
-                    <h3>Share Color</h3>
-                    <div className="combination-group">
+                <h3>Share Color</h3>
+                <div className="share-group">
+
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                        <EmailShareButton url={shareUrl} quote={mainColor}>
+                            <EmailIcon size={32} borderRadius={4} />
+                        </EmailShareButton>
+
+                        <WhatsappShareButton url={shareUrl} title={mainColor}>
+                            <WhatsappIcon size={32} borderRadius={4} />
+                        </WhatsappShareButton>
+
+                        <div
+                            title="Copy URL"
+                            onClick={() => {
+                                copyToClipboard(shareUrl);
+                            }}
+                            style={{
+                                backgroundColor: mainColor,
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                width: '32px',
+                                height: '32px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: textColor,
+                            }}
+                        >
+
+                            <FaRegCopy size={20} />
+                        </div>
                     </div>
+
+                </div>
 
             </div >
 
