@@ -274,6 +274,10 @@ function ColorPage() {
 
                 </div >
 
+                    <h3>Share Color</h3>
+                    <div className="combination-group">
+                    </div>
+
             </div >
 
             <footer className="footer" style={{ backgroundColor: mainColor, color: textColor }}>
